@@ -1,0 +1,15 @@
+.popular{
+    height: 100%;
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4vh;
+}
+
+.popular-tvshows{
+    padding: 8vh;
+}
+
+.popular-tvshows h3{
+    margin: 2vh 0vh;
+}
