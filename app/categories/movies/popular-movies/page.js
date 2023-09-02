@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link'
-import "./page.css"
+import "../../.css"
 import SearchIcon from '@mui/icons-material/Search';
 
 
@@ -11,6 +11,22 @@ import SearchIcon from '@mui/icons-material/Search';
 function MainPage() {
 
   const [popular, setpopular] = useState([]);
+
+  const [inputText, setInputText] = useState("");
+  let inputHandler = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  };
+ 
+
+const filteredData = popular.filter((el) => {
+  if (inputText === '') {
+    return true; 
+  } else {
+    return el.title.toLowerCase().includes(inputText);
+  }
+});
+
 
   useEffect(() => {
     axios.get("https://api.themoviedb.org/3/movie/popular?api_key=16242317f3764cb8c2c121692d453792")
@@ -27,25 +43,24 @@ function MainPage() {
   return (
 
     <div className='main w-100 h-100'>
-      <div className='search bg-transparent p-4 '>
-        <SearchIcon />
-        <input type="text" placeholder="Search" />
-      </div>
 
-      <div className='popular-movies'>
+      <div className='contain'>
+        <div className="searchinp">
+          <SearchIcon />
+          <input type="text" placeholder="Search" onChange={inputHandler} />
+        </div>
         <h3>Popular Movies</h3>
-        <div className='popular'>
-          {popular && popular.map((item) => {
+        <div className='row'>
+          {filteredData && filteredData.map((item) => {
             return (
-              <Card style={{ width: '12vw', flexShrink: "0", height: "50vh", borderRadius: "10px" , overflowY: "hidden"}}>
-                <Link href={`/${item.id}`} style={{ textDecoration: "none" }}  >
-                  <Card.Img style={{ width: '100%', height: "80%" }} src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} />
-                  <Card.Body>
-                    <Card.Title style={{ fontSize: "2vh" }}>{item.title}</Card.Title>
-                    <Card.Text style={{ fontSize: "2vh" }}>{item.release_date}</Card.Text>
-                  </Card.Body>
-                </Link>
-              </Card>
+              <Card style={{ width: '15vw',backgroundColor:"#212529" ,flexShrink: "0", height: "50vh", borderRadius: "10px", overflowY: "hidden" }}>
+                  <Link href={`/${item.id}`} style={{ textDecoration: "none" }}  >
+                    <Card.Img style={{ width: '100%', height: "40vh" }} src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} />
+                    <Card.Body>
+                      <Card.Title style={{ fontSize: "2vh", color:"white" }}>{item.title}</Card.Title>
+                    </Card.Body>
+                  </Link>
+                </Card>
             )
           })
           }

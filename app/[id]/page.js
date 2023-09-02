@@ -1,17 +1,27 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, CSSProperties } from 'react'
 import axios from 'axios'
 import Link from "next/link"
-import "../[id]/page.css"
+import "../globals.css";
 import YouTube, { YouTubeProps } from 'react-youtube';
+import ClipLoader from "react-spinners/ClipLoader";
 
+
+const style = { position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"};
+  
 const page =  ({ params }) => {
 
     const [details, setdetails] = useState("")
     const [trailer, settrailer] = useState("")
     const [genres, setgenres] = useState("")
 
+    let [loading, setLoading] = useState(false);
+
     useEffect(() => {
+        setLoading(true)
+        setTimeout(()=>{
+            setLoading(false)
+        }, 500)
         axios.get(`https://api.themoviedb.org/3/movie/${params.id}?api_key=16242317f3764cb8c2c121692d453792`)
             .then((res) => {
                 const pr = JSON.stringify(res.data);
@@ -50,46 +60,67 @@ const page =  ({ params }) => {
         height: '270',
         width: '430',
         playerVars: {
-            //   autoplay: 1,
+              autoplay: 1,
         },
     };
 
     return (
-
         <div className='page' >
-            <div className='drop'>
-                <img src={`https://image.tmdb.org/t/p/w500/${details.backdrop_path}`} />
-                <div className='overlay'></div>
-            </div>
-
-            <div className='full'>
-                <img src={`https://image.tmdb.org/t/p/w500/${details.poster_path}`} />
-                <div className="dets">
-                    <div className="box">
-                        <h3>{details.title}</h3>
+            {
+                loading?
+                    <div style={style}>
+                        <ClipLoader
+                            color={'#212529'}
+                            loading={loading}
+                            size={150}
+                        />
                     </div>
-                    <h6 style={{ color: "grey", fontWeight: "bold" }}>{details.tagline}</h6>
-                    <div className="text_box_genres">
-                        <h6>{genres[0]}</h6>
-                        <h6>{genres[1]}</h6>
-                        <h6>{genres[2]}</h6>
-                    </div>
-                    <div className="text_box">
-                        <h6>{details.overview}</h6>
-                    </div>
+                    :
+                    <div >
 
-                    <Link href={`${details.homepage}`}
-                        style={{ textDecoration: "none", marginTop: "5vh" }}>
-                        Click to see more ...
-                    </Link>
+                        <div className='drop'>
+                            <img src={`https://image.tmdb.org/t/p/w500/${details.backdrop_path}`} />
+                            <div className='overlay'></div>
+                        </div>
 
-                    <YouTube videoId={`${trailer}`}
-                        opts={opts}
-                        onReady={onPlayerReady}
-                        style={{ marginLeft: '35vw', marginTop: "-28vh", position: "absolute" }}
-                    />
-                </div>
-            </div>
+                        <div className='full'>
+                            <img src={`https://image.tmdb.org/t/p/w500/${details.poster_path}`} />
+                            <div className="dets">
+                                <div className="box">
+                                    <h3>{details.title}</h3>
+                                </div>
+                                <h6 style={{ color: "grey", fontWeight: "bold" }}>{details.tagline}</h6>
+                                <div className="text_box_genres">
+                                    <h6>{genres[0]}</h6>
+                                    <h6>{genres[1]}</h6>
+                                    <h6>{genres[2]}</h6>
+                                </div>
+                                <div className="text_box">
+                                    <h6>{details.overview}</h6>
+                                </div>
+
+                                <Link href={`${details.homepage}`}
+                                    style={{ textDecoration: "none", marginTop: "5vh" }}>
+                                    Click to see more ...
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className='trailer'>
+                            {trailer ? (
+                                <YouTube
+                                    videoId={`${trailer}`}
+                                    opts={opts}
+                                    onReady={onPlayerReady}
+                                />
+                            ) : (
+                                <p style={{ color: "red" }}>No trailer available !!</p>
+                            )}
+                        </div>
+                    </div>
+            }
+
+
         </div>
     );
 };

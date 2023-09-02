@@ -1,13 +1,36 @@
-img{
-    width: 100%;
-    height: 92vh;
-    object-position: center;
-}
-
 body{
     background-size: cover;
-    background-position: top;
-    /* background: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0,0,0,0.6)),url("https://images5.alphacoders.com/444/444300.jpg"); */
+    background: url("./download.png");
+}
+
+.search{
+    width: 100%;
+    background-color: transparent;
+    margin-top: 9vh;
+    padding: 5vh 5.5vw;
+}
+
+.trendingg>h3{
+    color: white;
+}
+
+.search>h2{
+    color: white;
+}
+
+input{
+    width: 60vw;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.searchinp{
+    margin-top: 5vh;
+    width: max-content;
+    padding: 2vh;
+    background-color: white;
+    border-radius: 30px;
 }
 
 .main{
@@ -16,34 +39,57 @@ body{
     overflow: hidden;
 }
 
-.trending{
+.contents{
+    padding: 5vh 5.5vw;
     display: flex;
-    gap: 1vw;
-    overflow-x: auto;
-    width: 92vw;
+    flex-direction: column;
+    gap: 15vh;
 }
 
-.trending-movies{
-    padding: 0vw 5vw;
+.trending{
+    display: flex;
+    gap: 2vw;
+    overflow-x: auto;
+    width: 92vw;
 }
 
 .trending::-webkit-scrollbar{
     display: none;
 }
 
-.search{
-    padding: 4vw 5vw;
-}
-
-.directors{
-    margin-top: 70vh;
-    padding: 0vw 5vw;
-
-}
-
 .end{
     width: 100%;
     height: 60vh;
-    background-color: antiquewhite;
-    margin-top: 30vh;
+    background-color: #212529;
+    padding: 10vh 0vh;
+}
+
+.center{
+    margin: auto;
+    padding: 5vh;
+    width: max-content;
+    display: flex;
+    gap: 7vh;
+}
+
+.credit>h2{
+    color: white;
+    font-weight: bold;
+
+}
+
+.credit>p{
+    color: white;
+}
+
+
+.credit>h5{
+    color: white;
+    font-weight: bold;
+}
+
+
+.credit>h6{
+    color: white;
+    margin-bottom: 2vh;
 }

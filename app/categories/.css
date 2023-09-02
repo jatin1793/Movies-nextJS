@@ -1,0 +1,39 @@
+body{
+    background-size: cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.3 ),rgba(0,0,0, 0.3)), url("../download.png");
+}
+
+.row{
+    display: flex;
+    gap: 2vw;
+}
+
+.searchinp>input{
+    width: 60vw;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+}
+
+::placeholder {
+    color: white;
+}
+
+.contain{
+    position: absolute;
+    margin: 13vh;
+}
+
+.contain>h3{
+    color: white;
+}
+
+.searchinp{
+    width: max-content;
+    padding: 2vh;
+    background-color: #212529;
+    border-radius: 30px;
+    margin-bottom: 5vh;
+}
+

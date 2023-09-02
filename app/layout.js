@@ -16,12 +16,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body suppressHydrationWarning>
-        <Navbar bg="dark" data-bs-theme="dark">
+        <Navbar bg="dark" data-bs-theme="dark" style={{ position: "fixed" , zIndex: 99999999, width: "100%" }}>
           <Container>
             <Navbar.Brand style={{ marginRight: "4vw"}}>TMDB</Navbar.Brand>
             <Nav className="me-auto">
 
-              <Nav.Link style={{ marginRight: "2vw"}} href='../'>Home</Nav.Link>
+              <Nav.Link style={{ marginRight: "2vw"}} href='../../'>Home</Nav.Link>
 
               <Dropdown style={{ marginRight: "2vw"}}>
                 <Dropdown.Toggle variant='dark' id="dropdown-basic" >Movies</Dropdown.Toggle> 
