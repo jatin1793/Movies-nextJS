@@ -1,11 +1,18 @@
 @font-face {
-    font-family: 'gilroy light';
-    src: url('/public/fonts/Gilroy-Light.ttf') format('ttf')
+    font-family: 'Gilroy';
+    src: url('/public/fonts/Gilroy-Light.ttf') format('ttf');
+    font-weight: thin;
+  }
+
+  @font-face {
+    font-family: 'DELIRIUM NCV';
+    src: url('/public/fonts/DeliriumNcv-Vm5e.ttf') format('ttf');
   }
 
 body{
     background-size: cover;
     background: url("./download.png");
+    font-family: Gilroy;
 }
 
 .search{
